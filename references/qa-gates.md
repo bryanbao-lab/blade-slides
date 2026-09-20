@@ -1,5 +1,7 @@
 # BLADE V2 QA Gates
 
+> 中文说明：请阅读 [qa-gates.zh-CN.md](qa-gates.zh-CN.md)。
+
 All blocking gates must pass. A visually pleasing thumbnail is not sufficient.
 
 ## Gate 1 — Source And Content

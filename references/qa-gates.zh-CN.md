@@ -1,0 +1,39 @@
+# BLADE V2 QA 关卡
+
+所有 blocker 必须通过。缩略图看起来不错并不足以交付。
+
+## Gate 1：源图与内容
+
+确定已验收源图与基线；精确核对文字、专名、数字、年份、币种和单位；重点检查 `AI / Al`、`1 / I / l`；官方 Logo 必须使用真实资产。
+
+## Gate 2：视觉保真
+
+进行整页源图/渲染图对比；标题、hero visual、复杂卡片、Logo wall、图表使用 100% crop；边框连续、角和接缝不缺不重；圆形资产完整、正圆、同尺寸且有 inset；重复系统遵循量测网格；光学材质和身份关键图像保留身份与质量。
+
+## Gate 3：人类可编辑性
+
+商业可读文字为原生；普通直线与几何尽量原生；重要对象有语义化 Selection Pane 名；可移动对象对应有意义的人类操作；没有微栅格拼图；固定视觉明确记录。
+
+## Gate 4：干净底图与 alpha
+
+`clean_base` 无前景副本；透明资产有真实 alpha、画布四角全透明；闭合边框资产具安全边距和完整可见边缘；黑/白/棋盘格无 matte 或环境污染；move-away 证据同时显示干净对象和自然原位置。
+
+## Gate 5：局部优化保护
+
+只有 `allowed_change_slides` 被修改；受保护页面与基线渲染或 inventory 相符；成功页面与已验收系统不能无原因重生成。
+
+## Gate 6：PowerPoint 结构
+
+画布来自标准或可信模板；页面、图片、原生文字、原生形状和原生线数量符合预期；contract 的 `powerpoint_name` 在文件中存在；字体可用或按批准规则嵌入/替换；无不支持几何、断裂关系或外部依赖。
+
+## Gate 7：真实 Microsoft PowerPoint
+
+无 Repair 打开、能正常保存关闭、可重新打开，并能以正确字体、换行和 z-order 导出 PDF/PNG。
+
+## Gate 8：最终包
+
+`unzip -t`、重建页的 `validate_layer_contract.py` 和最终 BLADE 的 `audit_human_editability.py --strict` 均通过；只对可信本地生成文件移除 quarantine；全部 PowerPoint 操作后记录 SHA-256；记录哈希后不再重开或改写文件。
+
+## 交付说明必须写清
+
+生产模式；哪些为原生文字/形状；哪些为独立透明艺术资产；哪些为保真固定；完成的 PowerPoint 验证；已知限制；最终校验和。

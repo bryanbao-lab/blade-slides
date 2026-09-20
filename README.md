@@ -1,81 +1,95 @@
-# BLADE Slides
+# BLADE Slides｜高保真可编辑 PPT 还原
 
-**Turn finished slide images into source-faithful, human-editable PowerPoint.**
+**中文优先阅读：** [完整中文 Skill](SKILL.zh-CN.md) · [English Skill](SKILL.md) · [中文参考资料导航](references/README.zh-CN.md) · [更新记录](CHANGELOG.md)
 
-BLADE stands for **Bao Layered Asset Decomposition & Editability**.
+> 从获认可的幻灯片图片、截图、图片型 PPTX/PDF，还原为**高保真、接近人工制作习惯、可实际编辑**的 PowerPoint。
 
-Image-first slide design can produce beautiful results, but the final page is often a flat image. BLADE provides an agent workflow, a layer contract, and deterministic QA scripts for reconstructing that approved design as a practical PowerPoint layer system.
+**BLADE = Bao Layered Asset Decomposition & Editability for PowerPoint**。
 
-The goal is not to vectorize every pixel. The goal is to preserve the approved visual quality while making the parts people actually need to edit behave like a human-authored deck.
+先用图像方式制作 PPT，往往能得到很好的视觉效果；但最终页面通常会变成一张平面图。BLADE 提供一套 Agent 工作流、图层契约和确定性 QA 脚本，把已验收设计还原成实用的 PowerPoint 图层系统。
 
-## What BLADE Rebuilds
+它的目标不是“把每一个像素都矢量化”，而是在不牺牲获认可的视觉品质前提下，让人真正需要调整的文字、模块和规则图形，像人工制作的 PPT 一样可理解、可移动、可复用。
 
-- readable business copy as native PowerPoint text;
-- ordinary cards, borders, axes, connectors, and separators as native shapes;
-- icons, medallions, metallic nodes, glass, and glow as clean movable transparent assets;
-- complex scene-bound visuals as documented fixed scene elements when separating them would damage fidelity;
-- meaningful modules with semantic Selection Pane names;
-- clean backgrounds that remain natural when foreground elements are moved away.
+## 中文用户从这里开始
 
-## What BLADE Rejects
+1. 阅读 [SKILL.zh-CN.md](SKILL.zh-CN.md)，了解完整工作流、可编辑边界和最终 QA。
+2. 运行 `scripts/init_layer_contract.py`，先决定哪些对象应移动、哪些必须保留为高保真复合视觉。
+3. 逐页构建与验证，不要直接把整页图片叠加可编辑文字。
+4. 交付前运行 `validate_layer_contract.py`、`audit_human_editability.py`，并在真实 Microsoft PowerPoint 中打开、保存、重开与导出。
 
-- a full-slide screenshot with editable text placed on top;
-- hundreds of tiny image slices pretending to be editable geometry;
-- generic `Image 37` / `TextBox 22` object naming throughout the deck;
-- incomplete borders, clipped circles, contaminated transparent assets, or duplicated foreground objects;
-- a file described as “fully editable” when most of the design remains an undisclosed flat image.
+参考材料均配有中文说明：
 
-## Repository Contents
+| 主题 | 中文资料 |
+| --- | --- |
+| 方法与图层拆分 | [methodology.zh-CN.md](references/methodology.zh-CN.md) |
+| 人类可编辑性标准 | [human-editability.zh-CN.md](references/human-editability.zh-CN.md) |
+| 页面交付契约 | [page-worker-contract.zh-CN.md](references/page-worker-contract.zh-CN.md) |
+| QA 关卡 | [qa-gates.zh-CN.md](references/qa-gates.zh-CN.md) |
+| 常见失败与修复 | [failure-modes.zh-CN.md](references/failure-modes.zh-CN.md) |
+| ImageGen 提示词模式 | [imagegen-prompts.zh-CN.md](references/imagegen-prompts.zh-CN.md) |
+
+## BLADE 会重建什么
+
+- 可读的商业文字，作为原生 PowerPoint 文本；
+- 普通卡片、边框、坐标轴、连接线和分割线，作为原生形状；
+- 图标、圆章、金属节点、玻璃和光效，作为干净、可移动的透明资产；
+- 与透视、人物或场景材质强绑定的复杂视觉，作为有明确说明的固定场景元素；
+- 带有语义化 Selection Pane 名称的完整模块；
+- 当前景元素移走后，仍然自然完整的干净背景。
+
+## BLADE 明确拒绝什么
+
+- 整页截图上方只叠可编辑文字；
+- 用数百张极小图片切片伪装可编辑几何；
+- 整套 deck 充满 `Image 37`、`TextBox 22` 这类无意义对象名；
+- 不完整的边框、被切掉的圆形、带底图污染的透明资产、或移动后露出第二个对象；
+- 大部分设计仍是一张未披露平面图，却被称为“完全可编辑”的文件。
+
+## 仓库内容
 
 ```text
 blade-slides/
-|-- SKILL.md
-|-- agents/openai.yaml
+|-- README.md                    # 中英双语介绍入口
+|-- SKILL.md                     # English workflow instructions
+|-- SKILL.zh-CN.md               # 完整中文工作说明
+|-- agents/openai.yaml           # 双语界面元数据
 |-- assets/layer-contract-template.json
-|-- references/
+|-- references/                  # English references + 中文对应资料
 |-- scripts/
 |   |-- init_layer_contract.py
 |   |-- validate_layer_contract.py
 |   |-- audit_human_editability.py
 |   `-- self_check.py
-|-- requirements.txt
-`-- README.md
+`-- requirements.txt
 ```
 
-## Requirements
+## 环境要求与安装
 
-- An AI agent that can read a skill/instruction directory.
-- Python 3.10 or newer.
-- Pillow and python-pptx for the bundled validators.
-- An image editor or image-generation capability for clean backgrounds and isolated visual assets.
-- Microsoft PowerPoint for the final approval gate.
+需要：能读取 skill/instruction 目录的 AI Agent、Python 3.10+、Pillow、python-pptx；用于处理干净底图与透明素材的图像编辑或生成能力；以及用于最终验收的真实 Microsoft PowerPoint。
 
-The bundled scripts are cross-platform. The final “opens without Repair and exports correctly” gate specifically requires real Microsoft PowerPoint; a library-only or alternate-office-suite test is not equivalent.
+打包脚本跨平台，但“无 Repair 打开且正确导出”的最终关卡必须在真实 Microsoft PowerPoint 中完成；只用库或其他办公套件测试并不等价。
 
-## Install
-
-### Codex
+### Codex 安装示例
 
 ```bash
 git clone https://github.com/bryanbao-lab/blade-slides.git ~/.codex/skills/blade-slides
 python3 -m pip install -r ~/.codex/skills/blade-slides/requirements.txt
 ```
 
-Then invoke:
+然后调用：
 
 ```text
-Use $blade-slides to reconstruct this approved slide image as a high-fidelity,
-human-editable PowerPoint. Keep text native, make regular modules editable,
-and preserve complex visuals as clean movable composites where needed.
+请使用 $blade-slides 将这张已获认可的幻灯片图片还原为高保真、可实际编辑的 PowerPoint。
+文字保持原生可编辑，规则模块独立可移动；必要时保留复杂视觉为干净的高保真复合图层。
 ```
 
-### Other agent runtimes
+### 其他 Agent 平台
 
-Clone or copy the repository into your platform's skill/instruction directory as `blade-slides`. If the platform ignores YAML front matter, provide `SKILL.md` as the workflow instruction and keep the `references/`, `scripts/`, and `assets/` paths together.
+将仓库克隆或复制到平台的 skill/instruction 目录，并命名为 `blade-slides`。若平台忽略 YAML front matter，直接提供 `SKILL.md` 或中文场景下的 `SKILL.zh-CN.md`；同时保留 `references/`、`scripts/` 与 `assets/` 的相对路径。
 
-## Quick Start
+## 快速开始
 
-Create a layer contract:
+创建图层契约：
 
 ```bash
 python3 scripts/init_layer_contract.py \
@@ -85,7 +99,7 @@ python3 scripts/init_layer_contract.py \
   --mode full_rebuild
 ```
 
-Complete the contract after inspecting the source, then validate one reconstructed page:
+根据源图填写 contract 后，验证重建页面：
 
 ```bash
 python3 scripts/validate_layer_contract.py \
@@ -94,7 +108,7 @@ python3 scripts/validate_layer_contract.py \
   --report /absolute/path/validation.json
 ```
 
-Audit a complete deck for pseudo-editability:
+对整套 deck 审核“伪可编辑”问题：
 
 ```bash
 python3 scripts/audit_human_editability.py \
@@ -103,72 +117,65 @@ python3 scripts/audit_human_editability.py \
   --report /absolute/path/human_editability.json
 ```
 
-Run the repository smoke test locally or in your own CI:
+运行本地自检：
 
 ```bash
 python3 -m pip install -r requirements.txt
 python3 scripts/self_check.py
 ```
 
-## Production Modes
+## 生产模式与图层类型
 
-| Mode | Use |
+| 模式 | 含义 |
 | --- | --- |
-| `full_rebuild` | Reconstruct a new page or complete flattened deck |
-| `local_refinement` | Change only specified pages or modules in an accepted deck |
-| `review_draft` | Produce a fast temporary file for content review; never present it as BLADE final |
+| `full_rebuild` | 重建新页面或完整图片化 deck |
+| `local_refinement` | 只调整已验收 deck 中指定页面或模块 |
+| `review_draft` | 快速临时审阅文件；绝不能称为 BLADE final |
 
-## Core Layer Types
-
-| Type | Meaning |
+| 类型 | 含义 |
 | --- | --- |
-| `clean_base` | Natural background after movable elements are removed |
-| `native_text` | Editable text |
-| `native_shape` | Safe regular PowerPoint geometry |
-| `transparent_png` | Movable source-faithful complex artwork |
-| `fixed_scene_visual` | Complex scene-bound visual intentionally kept fixed for fidelity |
+| `clean_base` | 移走可移动元素后仍自然的背景 |
+| `native_text` | 可编辑文本 |
+| `native_shape` | 安全、规则的 PowerPoint 几何 |
+| `transparent_png` | 可移动、保真度高的复杂视觉资产 |
+| `fixed_scene_visual` | 为保真而有意固定的场景绑定视觉 |
 
-## Honest Editability Boundary
+## 如实说明可编辑边界
 
-BLADE is **fidelity-first layered editability**, not automatic full vectorization.
+BLADE 是**保真优先的分层可编辑**，不是自动的全量矢量化。
 
-Some elements should remain high-quality raster composites:
+光学玻璃、金属材质、摄影、复杂光路、粒子网络，以及和建筑/人物/透视强绑定的视觉，通常应保留为高品质栅格复合体。最终交付必须明确：哪些对象为原生文本或形状、哪些为可移动透明资产、哪些为保真固定元素。
 
-- optical glass and metallic material;
-- photography;
-- complex light paths and particle networks;
-- visuals tightly bound to architecture, people, or perspective.
+## 隐私与公开安全
 
-The workflow requires these boundaries to be explicit. A final handoff should state what is native, what is a movable transparent asset, and what remains fixed.
+本仓库不包含客户演示稿、公司机密设计或文案、私有 Logo 或源图、用户本机路径、API Key、Token、凭据、OCR 输出，或由私有 deck 生成的生产 QA 报告。示例均为通用内容。
 
-## Privacy And Public-Safe Packaging
+除非你拥有公开权利，否则不要提交源演示稿、提取媒体、clean base、截图或审阅证据，也不要提交非官方的企业 Logo 副本。
 
-This repository contains:
+## 参与贡献
 
-- no client presentation;
-- no company-confidential design or copy;
-- no private logo or source image;
-- no user-specific filesystem path;
-- no API key, token, credential, or OCR output;
-- no production QA report derived from a private deck.
+欢迎提交 bug report 和 pull request。特别欢迎：更多 PowerPoint 结构检查、更可靠的透明/边缘完整性诊断、采用宽松授权素材的可复现公开示例，以及跨平台的 Microsoft PowerPoint 自动化说明。
 
-The layer examples are generic. Never commit source presentations, extracted media, clean bases, screenshots, or review evidence unless you have the right to publish them.
+## English
 
-## Contributing
+**Turn finished slide images into source-faithful, human-editable PowerPoint.**
 
-Bug reports and pull requests are welcome. Useful contributions include:
+BLADE turns an approved flat slide design into a practical layer system instead of merely placing editable text over a screenshot. It preserves visual quality while making the elements a human actually needs to adjust meaningful, movable, and reusable.
 
-- additional PowerPoint structural checks;
-- safer alpha and edge-completeness diagnostics;
-- reproducible public examples with permissive assets;
-- cross-platform Microsoft PowerPoint automation notes.
+Start with [SKILL.md](SKILL.md). The core workflow is:
 
-Please do not submit proprietary slide content or unofficial copies of corporate logos.
+1. classify every visible object with a layer contract;
+2. rebuild readable copy as native text and regular geometry as native shapes;
+3. retain complex materials as clean meaningful transparent composites or documented fixed scene visuals;
+4. prove clean-base exclusivity and move-away behavior;
+5. validate in real Microsoft PowerPoint, then record final QA and checksum.
 
-## Author
+The same repository includes full English references and corresponding Chinese guides. See [references/README.zh-CN.md](references/README.zh-CN.md) for the Chinese reference map.
 
-Created by [Bryan Bao](https://github.com/bryanbao-lab).
+## Author and license
 
-## License
+Created by [Bryan Bao](https://github.com/bryanbao-lab). Released under the [MIT License](LICENSE).
 
-MIT
+## Version
+
+**V2.1.0** adds a Chinese-first bilingual README, a complete Chinese skill guide, Chinese reference guides, and bilingual UI metadata. The underlying public-safe workflow and deterministic scripts remain compatible with V2.0.0.
