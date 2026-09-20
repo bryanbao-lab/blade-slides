@@ -1,0 +1,111 @@
+{
+  "schema_version": 3,
+  "skill_version": "2.0.0",
+  "slide_id": "slide_01",
+  "source_image": "/absolute/path/source.png",
+  "reconstruction_mode": "full_rebuild",
+  "delivery_level": "blade_full",
+  "slide_size_px": [3840, 2160],
+  "slide_size_in": [13.333333, 7.5],
+  "accepted_baseline": {
+    "source_deck": "",
+    "allowed_change_slides": [],
+    "protected_slides": [],
+    "protected_render_compare_required": false
+  },
+  "editability_policy": {
+    "user_requested_movable": [],
+    "preserve_source_pixels": [],
+    "hero_visuals": [],
+    "script_generated_visuals_forbidden": true
+  },
+  "structure_policy": {
+    "human_editable_layer_model": true,
+    "semantic_names_required": true,
+    "regular_geometry_native": true,
+    "micro_raster_fragments_forbidden": true,
+    "meaningful_module_granularity": true,
+    "selection_pane_reviewed": false
+  },
+  "visual_fidelity_checks": {
+    "nested_corner_pairs": [],
+    "optical_material_regions": [],
+    "open_gradient_regions": [],
+    "repeated_system_motifs": [],
+    "icon_semantic_anchors": [],
+    "copy_linebreak_locks": [],
+    "high_design_paths": [],
+    "perspective_bound_scene_elements": [],
+    "occlusion_relationships": [],
+    "hero_composite_boundaries": [],
+    "layer_exclusivity_pairs": [],
+    "collision_clearances": [],
+    "edge_completeness_checks": [],
+    "contained_shape_insets": [],
+    "paired_panel_seams": [],
+    "repeated_grid_systems": [],
+    "asset_safety_padding": []
+  },
+  "content_verification": {
+    "source_zoom_reviewed": false,
+    "proper_nouns": [],
+    "confusable_pairs_checked": ["AI vs Al", "1 vs I vs l", "currency symbols and units"],
+    "forbidden_text_tokens": []
+  },
+  "source_fidelity": {
+    "source_critical_reviewed": false,
+    "review_evidence": [],
+    "layers": {}
+  },
+  "layers": [
+    {
+      "id": "clean_base",
+      "kind": "clean_base",
+      "path": "/absolute/path/clean_base.png",
+      "bbox_px": [0, 0, 3840, 2160],
+      "z_index": 0,
+      "editable": false,
+      "significant": true,
+      "powerpoint_name": "s01_clean_base",
+      "movement_unit": "environment base",
+      "semantic_group": "environment"
+    },
+    {
+      "id": "title",
+      "kind": "native_text",
+      "text": "Verified title",
+      "bbox_px": [120, 120, 1800, 220],
+      "z_index": 50,
+      "editable": true,
+      "significant": true,
+      "powerpoint_name": "s01_title",
+      "movement_unit": "slide title",
+      "semantic_group": "title"
+    },
+    {
+      "id": "panel_shell",
+      "kind": "transparent_png",
+      "asset_role": "panel_shell",
+      "path": "/absolute/path/panel_shell.png",
+      "bbox_px": [240, 480, 1500, 900],
+      "z_index": 20,
+      "editable": true,
+      "significant": true,
+      "powerpoint_name": "s01_panel_shell",
+      "movement_unit": "complete panel shell",
+      "reuse_key": "panel_shell_primary",
+      "closed_border_required": true,
+      "safety_padding_px": 4,
+      "semantic_group": "panels"
+    }
+  ],
+  "expected": {
+    "slide_count": 1,
+    "native_text_min": 1,
+    "native_shape_min": 0,
+    "native_line_min": 0,
+    "picture_min": 2,
+    "movable_foreground_min": 1,
+    "semantic_named_significant_min": 3
+  }
+}
