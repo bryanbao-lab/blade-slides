@@ -1,5 +1,7 @@
 # Human Editability Standard
 
+> 中文说明：请阅读 [human-editability.zh-CN.md](human-editability.zh-CN.md)。
+
 ## Outcome
 
 BLADE editability is not measured by object count. A PowerPoint user should be able to understand, select, move, replace, and reuse meaningful objects on the canvas and in the Selection Pane.

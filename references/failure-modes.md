@@ -1,5 +1,7 @@
 # Failure Modes And Recovery
 
+> 中文说明：请阅读 [failure-modes.zh-CN.md](failure-modes.zh-CN.md)。
+
 ## A. Text-Overlay Or Slice-Mosaic Pseudo-Editability
 
 **Symptoms:** hundreds of tiny pictures, generic names, no native lines, large flat areas, or editable text placed over a whole-page image.

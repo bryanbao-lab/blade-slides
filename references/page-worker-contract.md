@@ -1,5 +1,7 @@
 # Page Worker Contract
 
+> 中文说明：请阅读 [page-worker-contract.zh-CN.md](page-worker-contract.zh-CN.md)。
+
 This reference defines the minimum evidence for one reconstructed page. Use the same structure whether work is performed by one agent or several independent page workers.
 
 ## Inputs

@@ -1,12 +1,14 @@
 ---
 name: blade-slides
-description: "Reconstruct approved slide images, screenshots, image-only PPTX/PDF, or flattened pages as high-fidelity, human-editable PowerPoint with meaningful movable modules, native text, safe native geometry, source-faithful transparent assets, semantic Selection Pane names, and real PowerPoint QA. Use for BLADE Slides or image-to-editable-PowerPoint work where visual fidelity and practical layer structure both matter. Do not treat text-overlay drafts, sliced-image mosaics, or flat page images as final BLADE deliverables."
+description: "Reconstruct approved slide images, screenshots, image-only PPTX/PDF, or flattened pages as high-fidelity, human-editable PowerPoint with meaningful movable modules, native text, safe native geometry, source-faithful transparent assets, semantic Selection Pane names, and real PowerPoint QA. Use for BLADE Slides or image-to-editable-PowerPoint work where visual fidelity and practical layer structure both matter. Do not treat text-overlay drafts, sliced-image mosaics, or flat page images as final BLADE deliverables. 中文完整说明见 SKILL.zh-CN.md。"
 metadata:
-  short-description: "Human-editable, source-faithful PowerPoint reconstruction"
-  version: "2.0.0"
+  short-description: "Human-editable, source-faithful PowerPoint reconstruction / 高保真可编辑 PPT 还原"
+  version: "2.1.0"
 ---
 
-# BLADE Slides V2.0.0
+# BLADE Slides V2.1.0
+
+> **中文用户 / Chinese readers:** 完整中文 Skill 请阅读 [SKILL.zh-CN.md](SKILL.zh-CN.md)。所有参考资料均提供对应的中文导航和说明，入口见 [README.md](README.md)。
 
 **Bao Layered Asset Decomposition & Editability for PowerPoint**
 

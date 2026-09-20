@@ -1,4 +1,4 @@
 interface:
-  display_name: "BLADE Slides V2"
-  short_description: "Source-faithful, human-editable PowerPoint reconstruction"
-  default_prompt: "Use $blade-slides to rebuild this approved slide design as a source-faithful, human-editable PowerPoint with meaningful movable modules, semantic Selection Pane names, and real PowerPoint QA."
+  display_name: "BLADE Slides｜高保真可编辑 PPT"
+  short_description: "Source-faithful editable PPT / 高保真可编辑 PPT 还原"
+  default_prompt: "Use $blade-slides to rebuild this approved slide design as a source-faithful, human-editable PowerPoint. 请保留文字原生可编辑、模块可移动，并完成真实 PowerPoint QA。"

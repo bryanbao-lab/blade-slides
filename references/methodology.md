@@ -1,5 +1,7 @@
 # BLADE V2 Methodology
 
+> 中文说明：请阅读 [methodology.zh-CN.md](methodology.zh-CN.md)。
+
 ## 1. Establish The Truth Set
 
 Before changing anything, collect:
