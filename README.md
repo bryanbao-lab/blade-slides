@@ -178,4 +178,6 @@ Created by [Bryan Bao](https://github.com/bryanbao-lab). Released under the [MIT
 
 ## Version
 
+**V2.1.1** refines material-aware decomposition, composited glass-opacity checks, and same-slide object protection. This is a bilingual guidance patch; scripts and schemas are unchanged. / 本次补丁完善材质优先判断、玻璃叠层透明度检查及同页对象保护；中英文同步，脚本和 schema 不变。
+
 **V2.1.0** adds a Chinese-first bilingual README, a complete Chinese skill guide, Chinese reference guides, and bilingual UI metadata. The underlying public-safe workflow and deterministic scripts remain compatible with V2.0.0.

@@ -1,5 +1,14 @@
 # Changelog｜更新记录
 
+## V2.1.1 — 2026-09-22
+
+### Fixed｜修正
+
+- Material-aware decomposition precedes ordinary geometry / 先判断复杂材质，再判断普通几何。
+- Validate glass opacity in the actual layered composition; pilot one representative panel before repeating / 在实际叠层中验证玻璃透明度，先检查代表性面板再复制同类系统。
+- Protect non-target objects on the edited slide and restrict changes to named properties / 局部修改精确到对象与属性，同页未点名对象也受保护。
+- Updated English and Chinese guidance together. No script, schema or CLI changes; no measured token-saving claim / 中英文同步；脚本、schema 和命令行不变，不宣称已验证 Token 节省。
+
 ## V2.1.0 — 2026-09-20
 
 ### Added｜新增

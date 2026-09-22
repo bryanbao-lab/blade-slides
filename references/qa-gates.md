@@ -35,12 +35,14 @@ All blocking gates must pass. A visually pleasing thumbnail is not sufficient.
 - Transparent assets have real alpha and fully transparent canvas corners.
 - Closed-border assets have safety padding and complete visible edges.
 - Black, white and checkerboard checks show no matte or environment contamination.
+- Glass interiors are checked over the actual background and existing backing layers; combined opacity preserves source-like translucency and text contrast, not merely transparent outer corners.
 - Move-away proof shows a clean object and a natural original position.
 
 ## Gate 5 — Local Refinement Protection
 
 - Only `allowed_change_slides` changed.
 - Protected slides match baseline renders or inventories.
+- For object-scoped edits, non-target objects on the changed slide also match the baseline; target changes stay within the recorded property scope, including apparent size after alpha-padding changes.
 - Successful pages and accepted systems were not regenerated without cause.
 
 ## Gate 6 — PowerPoint Structure

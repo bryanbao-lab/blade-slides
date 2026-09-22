@@ -3,10 +3,10 @@ name: blade-slides
 description: "Reconstruct approved slide images, screenshots, image-only PPTX/PDF, or flattened pages as high-fidelity, human-editable PowerPoint with meaningful movable modules, native text, safe native geometry, source-faithful transparent assets, semantic Selection Pane names, and real PowerPoint QA. Use for BLADE Slides or image-to-editable-PowerPoint work where visual fidelity and practical layer structure both matter. Do not treat text-overlay drafts, sliced-image mosaics, or flat page images as final BLADE deliverables. 中文完整说明见 SKILL.zh-CN.md。"
 metadata:
   short-description: "Human-editable, source-faithful PowerPoint reconstruction / 高保真可编辑 PPT 还原"
-  version: "2.1.0"
+  version: "2.1.1"
 ---
 
-# BLADE Slides V2.1.0
+# BLADE Slides V2.1.1
 
 > **中文用户 / Chinese readers:** 完整中文 Skill 请阅读 [SKILL.zh-CN.md](SKILL.zh-CN.md)。所有参考资料均提供对应的中文导航和说明，入口见 [README.md](README.md)。
 
@@ -45,6 +45,8 @@ Improve an accepted BLADE deck without rebuilding successful pages. Record:
 - `protected_slides`
 - the render or structure comparison used to protect unchanged pages
 
+For object-scoped edits, record target semantic names and permitted properties; protect all other objects on the same slide (see methodology, Local refinement).
+
 Conservative OOXML or library patches are allowed, but the final file must still be opened, saved, reopened, and exported by real Microsoft PowerPoint.
 
 ### `review_draft`
@@ -82,7 +84,7 @@ Read [methodology.md](references/methodology.md) for the complete decision proce
 A final BLADE page must satisfy all of these conditions:
 
 1. **Meaningful movement units:** cards, icons, title bars, logo cells, medallions, nodes, and callouts move as useful objects rather than many raster fragments.
-2. **Native regular geometry:** straight lines, closed borders, ordinary rounded rectangles, axes, and simple arrows use safe native shapes where practical.
+2. **Native regular geometry:** ordinary lines, borders, cards, axes, and arrows without complex material use safe native shapes. A rectangular outline does not make a glass, metal, or glow shell ordinary geometry.
 3. **Source-faithful complex material:** metallic, glass, glow, particle, and hero visuals may remain one clean transparent composite.
 4. **Readable Selection Pane:** every significant object uses a semantic name such as `s08_logo_wall_panel` or `s14_milestone_200b`.
 5. **Consistent repeated systems:** repeated cards, medallions, logo cells, and navigation elements share dimensions, padding, corner rules, and a `reuse_key`.
@@ -130,7 +132,7 @@ These are blocking checks:
 - **Logo wall:** separate the wall panel, header bar, cell shells, and authentic logos; keep logo proportions.
 - **Repeated modules:** measure one approved master and reuse it instead of redrawing each copy by eye.
 
-For complex panels, a clean movable shell PNG plus native text and icons is acceptable. It must have complete geometry, transparent corners, and sufficient padding.
+For complex panels, a clean movable shell PNG plus native text and icons is acceptable. It must have complete geometry, transparent corners, and sufficient padding. For layered glass, read methodology's Panel systems checks for actual composite opacity, not just the presence of alpha.
 
 ## Charts And Premium Callouts
 
