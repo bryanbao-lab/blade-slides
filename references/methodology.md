@@ -25,6 +25,8 @@ Use for a new page or a full batch. Build and validate each page independently. 
 
 Use for corrections to an accepted deck. Record the baseline deck, allowed slide numbers, protected slide numbers, and how protected pages will be compared. Patch only the failed system or object.
 
+For object-scoped requests, also list target semantic names and permitted properties in the revision record (for example, image material only, not geometry or text). Protect non-target objects on the same slide: compare text/style, geometry, z-order and image content against the baseline. For material-only replacement, preserve placement/crop and check the new asset's visible-alpha bounds so different transparent padding does not change its apparent size. Reuse the existing deck rather than rerunning a whole-page builder. After an Office save, use semantic or rendered comparison rather than requiring byte-identical XML serialization.
+
 ### Review draft
 
 Use only for urgent content review. It may use a flat page and editable text overlay, but must be labelled as a draft and never pass the BLADE final gate.
@@ -34,9 +36,9 @@ Use only for urgent content review. It may use a flat page and editable text ove
 For every visible element:
 
 1. Is the user expected to edit its text? Use `native_text`.
-2. Is it a regular border, line, card, axis or connector? Use `native_shape`.
-3. Does it have optical material, source-critical imagery, metallic/glass treatment or complex lighting? Use `transparent_png` as one meaningful module.
-4. Is it bound to scene perspective or occlusion and not requested movable? Use `fixed_scene_visual` or fold it into the `clean_base`.
+2. Is it bound to scene perspective or occlusion and not requested movable? Use `fixed_scene_visual` or fold it into the `clean_base`.
+3. Does its appearance depend on optical material, source-critical imagery, metallic/glass treatment or complex lighting? Use a source-faithful `transparent_png` as one meaningful module, even if its outline is rectangular or circular.
+4. Otherwise, is it an ordinary border, line, card, axis or connector? Use `native_shape`.
 5. Would separating it require environment pixels, fragmented arcs or many small slices? Enlarge the meaningful composite boundary or keep it fixed.
 
 Never choose a representation only to maximize object count.
@@ -71,6 +73,10 @@ The clean base fails if it contains:
 ### Panel systems
 
 Use native shapes for ordinary geometry. For complex cut corners, gold edging, glass and soft shadows, create a clean transparent shell with complete borders and safety padding. Keep icon and text separate where useful.
+
+Before generating a repeated panel family, place one representative shell over the actual slide background with its foreground text and inspect it at delivery scale. Verify rim weight/color, frosting and background visibility before propagating the treatment; a standalone asset on checkerboard is not enough.
+
+Distinguish transparent surroundings from translucent glass interiors. Inspect the shell interior and any existing native backing together: for opacity values in [0,1], two overlapping layers have combined opacity `1 - (1 - a) * (1 - b)`. This is a compositing diagnostic, not a model of optical frosting. Do not copy a fixed alpha value between decks. Match the source's background visibility and text contrast in the actual composite, preserving metallic edges and highlights; a valid alpha channel can still contain an effectively opaque white interior. If material/color/shape already match and only transparency fails, diagnose that property before regenerating the entire design, using the permitted image-editing workflow.
 
 ### Paired header and body frames
 
