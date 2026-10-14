@@ -1,5 +1,16 @@
 # Changelog｜更新记录
 
+## V2.2.0 — 2026-10-14
+
+### Added｜新增
+
+- Bounded multi-agent orchestration for multi-page decks: freeze a reviewed pilot, delegate isolated page groups, and keep integration plus whole-deck QA with one parent task / 新增多页 deck 的有界多 Agent 编排：先冻结已审核试点页，再隔离委派页面组，由单一父级负责集成与整 deck QA。
+- Guidance for choosing sub-agents versus separate sessions, preventing overlapping writes, and falling back to sequential work when coordination is not safe or worthwhile / 明确 sub-agent 与独立 session 的选择、并发写入隔离及不适合并行时的顺序执行策略。
+
+### Changed｜调整
+
+- New contracts use skill version 2.2.0; validator continues accepting contracts from 2.0.0 through 2.1.1 / 新 contract 使用 skill_version 2.2.0；验证器继续兼容 2.0.0–2.1.1 版本的 contract。
+
 ## V2.1.1 — 2026-09-22
 
 ### Fixed｜修正

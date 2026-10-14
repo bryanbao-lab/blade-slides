@@ -3,10 +3,10 @@ name: blade-slides
 description: "Reconstruct approved slide images, screenshots, image-only PPTX/PDF, or flattened pages as high-fidelity, human-editable PowerPoint with meaningful movable modules, native text, safe native geometry, source-faithful transparent assets, semantic Selection Pane names, and real PowerPoint QA. Use for BLADE Slides or image-to-editable-PowerPoint work where visual fidelity and practical layer structure both matter. Do not treat text-overlay drafts, sliced-image mosaics, or flat page images as final BLADE deliverables. 中文完整说明见 SKILL.zh-CN.md。"
 metadata:
   short-description: "Human-editable, source-faithful PowerPoint reconstruction / 高保真可编辑 PPT 还原"
-  version: "2.1.1"
+  version: "2.2.0"
 ---
 
-# BLADE Slides V2.1.1
+# BLADE Slides V2.2.0
 
 > **中文用户 / Chinese readers:** 完整中文 Skill 请阅读 [SKILL.zh-CN.md](SKILL.zh-CN.md)。所有参考资料均提供对应的中文导航和说明，入口见 [README.md](README.md)。
 
@@ -52,6 +52,18 @@ Conservative OOXML or library patches are allowed, but the final file must still
 ### `review_draft`
 
 Create a fast temporary review file, such as editable text over a flat slide image. This is not a BLADE final. Mark the filename and delivery report as `REVIEW_DRAFT`, and never claim that it is fully layered.
+
+## Parallel Work Orchestration
+
+For a multi-page deck, keep one parent task/session as the source of truth for the brief, approved design system, layer-contract decisions, final deck, and whole-deck QA. When the runtime supports sub-agents and page groups are genuinely independent, delegate bounded page batches to a small number of sub-agents instead of creating a visible project session for every slide. Use separate sessions only for independent, long-lived workstreams, different execution environments, or when explicitly requested.
+
+Before fan-out, the parent must:
+
+1. Complete and review one representative pilot page; freeze typography, spacing, asset treatment, naming, contract fields, output paths, and validation expectations.
+2. Split work by disjoint page groups and dependencies. Keep coupled or visually linked pages together; do not assign multiple workers the same slide, shared contract, baseline, or final deck.
+3. Give every worker an isolated working directory and a bounded input/output contract. Start with a few groups (typically 2-4, adjusted for workload and tool limits), not one worker per slide by default.
+
+Each worker returns validated single-page PPTX files with their contracts, previews, source/render comparison, move-away evidence, validation report, and known fidelity boundaries. Workers do not edit or merge the final deck. The parent checks each handoff, resolves shared-style drift, integrates pages in order, and runs whole-deck visual, structural, package, and real-PowerPoint QA. If the runtime lacks safe sub-agent isolation, page dependencies are coupled, or integration overhead outweighs the gain, work sequentially in the same parent task. Parallelism reduces elapsed time; it does not lower fidelity or acceptance gates.
 
 ## Freeze The Layer Contract
 

@@ -4,6 +4,15 @@
 
 This reference defines the minimum evidence for one reconstructed page. Use the same structure whether work is performed by one agent or several independent page workers.
 
+## Orchestration And Parallel Batches
+
+- Keep one parent task/session responsible for the brief, pilot, frozen visual/layer contract, final deck, and whole-deck acceptance.
+- Prefer a few bounded sub-agent page groups over one visible session per slide when the runtime supports isolated work. Use separate sessions for independent long-lived workstreams, different environments, or an explicit user request.
+- Freeze a reviewed pilot before delegation. Split only across disjoint page groups; keep dependent pages together and never permit concurrent edits to the same page, shared contract, baseline, or final deck.
+- Give each worker an isolated directory, exact inputs, page ownership, output checklist, and validation commands. A typical starting point is 2-4 groups, adjusted to workload and tool limits.
+- Workers return single-page deliverables and evidence; the parent alone resolves style drift, merges in order, and runs whole-deck QA. Fall back to sequential work when isolation is unavailable or coordination cost is higher than the expected time saving.
+- Parallel work changes scheduling, not the fidelity, editability, or PowerPoint acceptance criteria.
+
 ## Inputs
 
 - Approved full-page source render.

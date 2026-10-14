@@ -172,6 +172,8 @@ def main():
         create_assets(root)
         create_pptx(root)
         data, contract_path = complete_contract(root)
+        if data.get("skill_version") != "2.2.0":
+            raise RuntimeError("contract generator did not emit skill_version 2.2.0")
 
         run(
             VALIDATE,
@@ -181,6 +183,16 @@ def main():
             "--report",
             root / "validation.json",
         )
+
+        legacy = json.loads(json.dumps(data))
+        legacy["skill_version"] = "2.0.0"
+        legacy_path = root / "legacy_layer_contract.json"
+        legacy_path.write_text(
+            json.dumps(legacy, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        run(VALIDATE, legacy_path, "--pptx", root / "page.pptx")
+
         run(
             AUDIT,
             root / "page.pptx",

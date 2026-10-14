@@ -26,7 +26,7 @@ def main():
     prefix = args.slide_id.replace("slide_", "s")
     contract = {
         "schema_version": 3,
-        "skill_version": "2.0.0",
+        "skill_version": "2.2.0",
         "slide_id": args.slide_id,
         "source_image": source,
         "reconstruction_mode": args.mode,
