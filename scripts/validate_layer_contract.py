@@ -16,6 +16,7 @@ ALLOWED_KINDS = {
     "fixed_scene_visual",
 }
 ALLOWED_MODES = {"full_rebuild", "local_refinement", "review_draft"}
+SUPPORTED_SKILL_VERSIONS = {"2.0.0", "2.1.0", "2.1.1", "2.2.0"}
 GENERIC_NAME = re.compile(
     r"^(Image|Picture|Text|TextBox|Shape|Rectangle|Oval|Line|Connector|Freeform|Group|"
     r"Rounded Rectangle|Isosceles Triangle)\s*\d+$",
@@ -54,8 +55,11 @@ def validate_contract(contract_path):
         errors.append(f"missing source image: {resolve_path(source_image, contract_path)}")
 
     if schema_version >= 3:
-        if data.get("skill_version") != "2.0.0":
-            errors.append("schema_version 3 requires skill_version 2.0.0")
+        if data.get("skill_version") not in SUPPORTED_SKILL_VERSIONS:
+            errors.append(
+                "schema_version 3 requires a supported skill_version: "
+                + ", ".join(sorted(SUPPORTED_SKILL_VERSIONS))
+            )
         mode = data.get("reconstruction_mode")
         if mode not in ALLOWED_MODES:
             errors.append(f"unsupported reconstruction_mode: {mode}")

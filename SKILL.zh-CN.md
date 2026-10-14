@@ -1,10 +1,10 @@
 ---
 name: blade-slides
 language: zh-CN
-version: "2.1.1"
+version: "2.2.0"
 ---
 
-# BLADE Slides V2.1.1｜高保真可编辑 PPT 分层还原
+# BLADE Slides V2.2.0｜高保真可编辑 PPT 分层还原
 
 **BLADE = Bao Layered Asset Decomposition & Editability for PowerPoint**。
 
@@ -48,6 +48,18 @@ BLADE 的目标不是把整页图片上方强行叠一层“可改文字”，�
 ### `review_draft`
 
 用于快速内容审阅的临时文件，例如全页底图上叠加可编辑文字。它**不是** BLADE final；文件名和交付说明必须写明 `REVIEW_DRAFT`，不得声称为完整分层可编辑稿。
+
+## 多 Agent 并行编排
+
+多页 deck 始终由一个父级 task/session 作为唯一事实来源，负责需求、已批准的设计系统、layer contract 决策、最终 deck 和全 deck QA。运行环境支持 sub-agent 且页面组确实相互独立时，将有边界的页面批次委派给少量 sub-agent；不要默认每页都创建一个可见项目 session。只有在工作流彼此长期独立、需要不同执行环境或用户明确要求时，才使用独立 session。
+
+派发前，父级必须：
+
+1. 完成并审核一个代表性试点页面；冻结字体、间距、素材处理、命名、contract 字段、输出路径和验证要求。
+2. 按互不重叠的页面组及依赖关系拆分。视觉或逻辑强耦合的页面放在同一组；绝不让多个 worker 同时编辑同一页、共享 contract、基线文件或最终 deck。
+3. 为每个 worker 提供隔离工作目录及清晰的输入/输出契约。先按工作量和工具限制使用少量分组（通常 2–4 组），不默认“一页一个 worker”。
+
+每个 worker 只交回已验证的单页 PPTX、contract、预览、源图/渲染对比、move-away 证据、验证报告和已知保真边界，不得直接修改或合并最终 deck。父级逐项验收交接、处理跨页风格偏差、按顺序集成页面，并完成整 deck 的视觉、结构、包完整性和真实 PowerPoint QA。若运行环境无法提供安全隔离、页面依赖紧密，或集成成本高于并行收益，则在同一父级 task 中顺序完成。并行只缩短等待时间，不降低保真度与验收门槛。
 
 ## 先冻结图层契约
 

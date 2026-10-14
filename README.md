@@ -178,6 +178,8 @@ Created by [Bryan Bao](https://github.com/bryanbao-lab). Released under the [MIT
 
 ## Version
 
+**V2.2.0** adds bounded multi-agent orchestration for multi-page decks: freeze a reviewed pilot, delegate isolated page groups, and keep integration and whole-deck QA with one parent task. New contracts use version 2.2.0 while contracts from 2.0.0 through 2.1.1 remain supported. / 本版新增多页 deck 的有界多 Agent 编排：冻结试点页、隔离委派页面组，由单一父级负责集成和整 deck QA。新 contract 使用 2.2.0，仍兼容 2.0.0–2.1.1。
+
 **V2.1.1** refines material-aware decomposition, composited glass-opacity checks, and same-slide object protection. This is a bilingual guidance patch; scripts and schemas are unchanged. / 本次补丁完善材质优先判断、玻璃叠层透明度检查及同页对象保护；中英文同步，脚本和 schema 不变。
 
 **V2.1.0** adds a Chinese-first bilingual README, a complete Chinese skill guide, Chinese reference guides, and bilingual UI metadata. The underlying public-safe workflow and deterministic scripts remain compatible with V2.0.0.
